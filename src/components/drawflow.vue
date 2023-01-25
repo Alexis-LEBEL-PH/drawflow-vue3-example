@@ -41,9 +41,9 @@ import Drawflow from 'drawflow'
 import styleDrawflow from 'drawflow/dist/drawflow.min.css'
 import style from '../assets/style.css' 
 import { onMounted, shallowRef, h, getCurrentInstance, render, readonly, ref } from 'vue'
-import Node1 from './nodes/node1.vue'
-import Node2 from './nodes/node2.vue'
-import Node3 from './nodes/node3.vue'
+import Node1 from './nodes/DataFeedNode.vue'
+import Node2 from './nodes/SendMQTTNode.vue'
+import Node3 from './nodes/MemoryStoreNode.vue'
 
 
 
@@ -52,21 +52,21 @@ export default {
   setup() {
    const listNodes = readonly([
         {
-            name: 'Get/Post',
+            name: 'Data Feed',
             color: '#49494970',
             item: 'Node1',
             input:0,
             output:1
         },
         {
-            name: 'Script',
+            name: 'Send MQTT',
             color: 'blue',
             item: 'Node2',
             input:1,
-            output:2
+            output:0
         },
          {
-            name: 'console.log',
+            name: 'Store in Memory',
             color: '#ff9900',
             item: 'Node3',
             input:1,
@@ -144,7 +144,7 @@ export default {
        editor.value.registerNode('Node2', Node2, {}, {});
        editor.value.registerNode('Node3', Node3, {}, {});
 
-       editor.value.import({"drawflow":{"Home":{"data":{"5":{"id":5,"name":"Node2","data":{"script":"(req,res) => {\n console.log(req);\n}"},"class":"Node2","html":"Node2","typenode":"vue","inputs":{"input_1":{"connections":[{"node":"6","input":"output_1"}]}},"outputs":{"output_1":{"connections":[]},"output_2":{"connections":[]}},"pos_x":1000,"pos_y":117},"6":{"id":6,"name":"Node1","data":{"url":"localhost/add", "method": "post"},"class":"Node1","html":"Node1","typenode":"vue","inputs":{},"outputs":{"output_1":{"connections":[{"node":"5","output":"input_1"}]}},"pos_x":137,"pos_y":89}}}}})
+      //  editor.value.import({"drawflow":{"Home":{"data":{"5":{"id":5,"name":"Node2","data":{"script":"(req,res) => {\n console.log(req);\n}"},"class":"Node2","html":"Node2","typenode":"vue","inputs":{"input_1":{"connections":[{"node":"6","input":"output_1"}]}},"outputs":{"output_1":{"connections":[]},"output_2":{"connections":[]}},"pos_x":1000,"pos_y":117},"6":{"id":6,"name":"Node1","data":{"url":"localhost/add", "method": "post"},"class":"Node1","html":"Node1","typenode":"vue","inputs":{},"outputs":{"output_1":{"connections":[{"node":"5","output":"input_1"}]}},"pos_x":137,"pos_y":89}}}}})
   })
 
   return {
