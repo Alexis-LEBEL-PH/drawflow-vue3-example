@@ -1,12 +1,20 @@
 <template>
     <div ref="el">
         <nodeHeader title="Send MQTT" />
-        <div>Encoding type :</div>
-        <select v-model="encoding_types[0]" placeholder="Select" @change="updateSelect" size="small" df-method>
-            <option v-for="(item, index) in encoding_types" :key="index" :value="item">
-                {{item}}
-            </option>
-        </select>
+        <label>Encoding type :
+            <select v-model="selected_encoding_type" placeholder="Select" @change="updateSelect" size="small" df-method>
+                <option v-for="(item, index) in encoding_types" :key="index" :value="item">
+                    {{ item }}
+                </option>
+            </select>
+        </label>
+        <tr></tr>
+        <br />
+        <label>
+            Offset / Scale : <br>
+            <ElInput v-model="offset" type="number" min=0 max=255 size="small"/>
+            <ElInput v-model="scale" type="number" min=0 max=65535 size="small"/>
+        </label>
     </div>
 </template>
 
@@ -24,12 +32,16 @@ export default defineComponent({
         const el = ref(null);
         const textarea = ref('');
         let df = null
-        const nodeId = ref(0);
+        const nodeId = ref(1);
         const encoding_types = readonly({
             0: 'varuint',
             1: 'varint (zigzag)',
             2: 'float',
-        })
+        });
+        const offset = ref(0);
+        const scale  = ref(0);
+        const MQTTValueID = ref(0);
+        const selected_encoding_type = ref(0);
         const drawer = ref(false);
         const direction = ref('rtl');
         df = getCurrentInstance().appContext.config.globalProperties.$df.value;
@@ -52,7 +64,8 @@ export default defineComponent({
             direction,
             textarea,
             updateSelect,
-            encoding_types
+            encoding_types,
+            offset, scale, MQTTValueID, selected_encoding_type,
         }
     },
 
