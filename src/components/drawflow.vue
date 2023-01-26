@@ -36,6 +36,7 @@ import Drawflow from 'drawflow'
 import styleDrawflow from 'drawflow/dist/drawflow.min.css'
 import style from '../assets/style.css'
 import { onMounted, shallowRef, h, getCurrentInstance, render, readonly, ref } from 'vue'
+import minify from '../minify_export.js'
 import Node1 from './nodes/DataFeedNode.vue'
 import Node2 from './nodes/SendMQTTNode.vue'
 import Node3 from './nodes/MemoryStoreNode.vue'
@@ -51,6 +52,7 @@ export default {
     const listNodes = readonly([
       {
         name: 'Data Feed',
+        block_type: 0,
         color: '#49494970',
         item: 'Node1',
         input: 0,
@@ -58,6 +60,7 @@ export default {
       },
       {
         name: 'Send MQTT',
+        block_type: 1,
         color: 'blue',
         item: 'Node2',
         input: 1,
@@ -65,6 +68,7 @@ export default {
       },
       {
         name: 'Store in Memory',
+        block_type: 2,
         color: '#ff9900',
         item: 'Node3',
         input: 1,
@@ -72,6 +76,7 @@ export default {
       },
       {
         name: 'Get from Memory',
+        block_type: 3,
         color: '#ff9900',
         item: 'Node4',
         input: 0,
@@ -79,6 +84,7 @@ export default {
       },
       {
         name: 'Sum',
+        block_type: 4,
         color: '#ff9900',
         item: 'Node5',
         input: 2,
@@ -86,6 +92,7 @@ export default {
       },
       {
         name: 'Difference',
+        block_type: 5,
         color: '#ff9900',
         item: 'Node6',
         input: 2,
@@ -101,7 +108,9 @@ export default {
     internalInstance.appContext.app._context.config.globalProperties.$df = editor;
 
     function exportEditor() {
-      dialogData.value = editor.value.export();
+      const exportedData = editor.value.export();
+      const minifiedData = minify.minify(exportedData, listNodes);
+      dialogData.value = minifiedData;
       dialogVisible.value = true;
     }
 
