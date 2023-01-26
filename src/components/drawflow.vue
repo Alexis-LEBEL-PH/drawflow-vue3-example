@@ -43,6 +43,8 @@ import Node3 from './nodes/MemoryStoreNode.vue'
 import Node4 from './nodes/MemoryFetchNode.vue'
 import Node5 from './nodes/SumNode.vue'
 import Node6 from './nodes/DifferenceNode.vue'
+import Node7 from './nodes/DivideNode.vue'
+import Node8 from './nodes/ProductNode.vue'
 
 
 
@@ -76,15 +78,31 @@ export default {
       },
       {
         name: 'Get from Memory',
-        block_type: 3,
+        block_type: 2,
         color: '#ff9900',
         item: 'Node4',
         input: 0,
         output: 1
       },
       {
-        name: 'Sum',
+        name: 'Product',
         block_type: 4,
+        color: '#ff9900',
+        item: 'Node8',
+        input: 2,
+        output: 1
+      },
+      {
+        name: 'Division',
+        block_type: 5,
+        color: '#ff9900',
+        item: 'Node7',
+        input: 2,
+        output: 1
+      },
+      {
+        name: 'Sum',
+        block_type: 6,
         color: '#ff9900',
         item: 'Node5',
         input: 2,
@@ -92,7 +110,7 @@ export default {
       },
       {
         name: 'Difference',
-        block_type: 5,
+        block_type: 7,
         color: '#ff9900',
         item: 'Node6',
         input: 2,
@@ -174,6 +192,8 @@ export default {
       editor.value.registerNode('Node4', Node4, {}, {});
       editor.value.registerNode('Node5', Node5, {}, {});
       editor.value.registerNode('Node6', Node6, {}, {});
+      editor.value.registerNode('Node7', Node7, {}, {});
+      editor.value.registerNode('Node8', Node8, {}, {});
 
       //  editor.value.import({"drawflow":{"Home":{"data":{"5":{"id":5,"name":"Node2","data":{"script":"(req,res) => {\n console.log(req);\n}"},"class":"Node2","html":"Node2","typenode":"vue","inputs":{"input_1":{"connections":[{"node":"6","input":"output_1"}]}},"outputs":{"output_1":{"connections":[]},"output_2":{"connections":[]}},"pos_x":1000,"pos_y":117},"6":{"id":6,"name":"Node1","data":{"url":"localhost/add", "method": "post"},"class":"Node1","html":"Node1","typenode":"vue","inputs":{},"outputs":{"output_1":{"connections":[{"node":"5","output":"input_1"}]}},"pos_x":137,"pos_y":89}}}}})
     })
