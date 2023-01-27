@@ -15,6 +15,10 @@ function minify(exportedData, listNodes) {
             }
         }
 
+        if('name' in exportedData[key].data) {
+            exportedData[key].data = exportedData[key].data.data;
+        }
+
         // removing useless information
         delete exportedData[key].id;
         delete exportedData[key].class;
