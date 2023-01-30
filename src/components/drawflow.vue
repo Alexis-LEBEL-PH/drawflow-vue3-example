@@ -37,10 +37,10 @@ import styleDrawflow from 'drawflow/dist/drawflow.min.css'
 import style from '../assets/style.css'
 import { onMounted, shallowRef, h, getCurrentInstance, render, readonly, ref } from 'vue'
 import minify from '../minify_export.js'
-import Node1 from './nodes/DataFeedNode.vue'
+// import Node1 from './nodes/DataFeedNode.vue'
 import Node2 from './nodes/SendMQTTNode.vue'
 import Node3 from './nodes/MemoryStoreNode.vue'
-import Node4 from './nodes/MemoryFetchNode.vue'
+// import Node4 from './nodes/MemoryFetchNode.vue'
 import Node5 from './nodes/SumNode.vue'
 import Node6 from './nodes/DifferenceNode.vue'
 import Node7 from './nodes/DivideNode.vue'
@@ -52,14 +52,14 @@ export default {
   name: 'drawflow',
   setup() {
     const listNodes = readonly([
-      {
-        name: 'Data Feed',
-        block_type: 0,
-        color: '#49494970',
-        item: 'Node1',
-        input: 0,
-        output: 1
-      },
+      // {
+      //   name: 'Data Feed',
+      //   block_type: 0,
+      //   color: '#49494970',
+      //   item: 'Node1',
+      //   input: 0,
+      //   output: 1
+      // },
       {
         name: 'Send MQTT',
         block_type: 1,
@@ -76,14 +76,14 @@ export default {
         input: 1,
         output: 0
       },
-      {
-        name: 'Get from Memory',
-        block_type: 2,
-        color: '#ff9900',
-        item: 'Node4',
-        input: 0,
-        output: 1
-      },
+      // {
+      //   name: 'Get from Memory',
+      //   block_type: 2,
+      //   color: '#ff9900',
+      //   item: 'Node4',
+      //   input: 0,
+      //   output: 1
+      // },
       {
         name: 'Product',
         block_type: 4,
@@ -126,7 +126,7 @@ export default {
     internalInstance.appContext.app._context.config.globalProperties.$df = editor;
 
     function exportEditor() {
-      const exportedData = editor.value.export();
+      const exportedData = JSON.parse(JSON.stringify(editor.value.export()));
       const minifiedData = minify.minify(exportedData, listNodes);
       dialogData.value = minifiedData;
       dialogVisible.value = true;
@@ -186,16 +186,16 @@ export default {
       editor.value = new Drawflow(id, Vue, internalInstance.appContext.app._context);
       editor.value.start();
 
-      editor.value.registerNode('Node1', Node1, {}, {});
+      // editor.value.registerNode('Node1', Node1, {}, {});
       editor.value.registerNode('Node2', Node2, {}, {});
       editor.value.registerNode('Node3', Node3, {}, {});
-      editor.value.registerNode('Node4', Node4, {}, {});
+      // editor.value.registerNode('Node4', Node4, {}, {});
       editor.value.registerNode('Node5', Node5, {}, {});
       editor.value.registerNode('Node6', Node6, {}, {});
       editor.value.registerNode('Node7', Node7, {}, {});
       editor.value.registerNode('Node8', Node8, {}, {});
 
-      editor.value.import({"drawflow":{"Home":{"data":{"1":{"id":1,"name":"Node1","data":{"id":1,"name":"Node1","data":{"method":"can"},"class":"Node1","html":"Node1","typenode":"vue","inputs":{},"outputs":{"output_1":{"connections":[]}},"pos_x":153,"pos_y":85},"class":"Node1","html":"Node1","typenode":"vue","inputs":{},"outputs":{"output_1":{"connections":[{"node":"5","output":"input_1"}]}},"pos_x":153,"pos_y":85},"2":{"id":2,"name":"Node1","data":{"id":2,"name":"Node1","data":{"method":"native"},"class":"Node1","html":"Node1","typenode":"vue","inputs":{},"outputs":{"output_1":{"connections":[]}},"pos_x":258,"pos_y":320},"class":"Node1","html":"Node1","typenode":"vue","inputs":{},"outputs":{"output_1":{"connections":[{"node":"4","output":"input_1"}]}},"pos_x":155,"pos_y":218},"3":{"id":3,"name":"Node4","data":{"id":3,"name":"Node4","data":{"method":3},"class":"Node4","html":"Node4","typenode":"vue","inputs":{},"outputs":{"output_1":{"connections":[]}},"pos_x":180,"pos_y":419},"class":"Node4","html":"Node4","typenode":"vue","inputs":{},"outputs":{"output_1":{"connections":[{"node":"4","output":"input_2"}]}},"pos_x":157,"pos_y":353},"4":{"id":4,"name":"Node8","data":{},"class":"Node8","html":"Node8","typenode":"vue","inputs":{"input_1":{"connections":[{"node":"2","input":"output_1"}]},"input_2":{"connections":[{"node":"3","input":"output_1"}]}},"outputs":{"output_1":{"connections":[{"node":"5","output":"input_2"}]}},"pos_x":611.5714285714286,"pos_y":268},"5":{"id":5,"name":"Node7","data":{},"class":"Node7","html":"Node7","typenode":"vue","inputs":{"input_1":{"connections":[{"node":"1","input":"output_1"}]},"input_2":{"connections":[{"node":"4","input":"output_1"}]}},"outputs":{"output_1":{"connections":[{"node":"6","output":"input_1"}]}},"pos_x":1045.4285714285713,"pos_y":208},"6":{"id":6,"name":"Node3","data":{},"class":"Node3","html":"Node3","typenode":"vue","inputs":{"input_1":{"connections":[{"node":"5","input":"output_1"}]}},"outputs":{},"pos_x":1526,"pos_y":206.42857142857142}}}}});
+      editor.value.import({"drawflow":{"Home":{"data":{"4":{"id":4,"name":"Node8","data":{},"class":"Node8","html":"Node8","typenode":"vue","inputs":{"input_1":{"connections":[]},"input_2":{"connections":[]}},"outputs":{"output_1":{"connections":[{"node":"5","output":"input_2"}]}},"pos_x":611.5714285714286,"pos_y":268},"5":{"id":5,"name":"Node7","data":{},"class":"Node7","html":"Node7","typenode":"vue","inputs":{"input_1":{"connections":[]},"input_2":{"connections":[{"node":"4","input":"output_1"}]}},"outputs":{"output_1":{"connections":[{"node":"6","output":"input_1"}]}},"pos_x":1045.4285714285713,"pos_y":208},"6":{"id":6,"name":"Node3","data":{},"class":"Node3","html":"Node3","typenode":"vue","inputs":{"input_1":{"connections":[{"node":"5","input":"output_1"}]}},"outputs":{},"pos_x":1526,"pos_y":206.42857142857142}}}}});
 
 
     })
