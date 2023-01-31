@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2023 Alexis LEBEL @ Poclain Hydraulics Industrie
+ *   All rights reserved.
+ */
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'

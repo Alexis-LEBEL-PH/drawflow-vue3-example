@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2023 Alexis LEBEL @ Poclain Hydraulics Industrie
+ *   All rights reserved.
+ */
 <template>
     <div ref="el">
         <nodeHeader title="Sum" />
