@@ -195,7 +195,7 @@ export default {
       editor.value.registerNode('Node7', Node7, {}, {});
       editor.value.registerNode('Node8', Node8, {}, {});
 
-      editor.value.import({"drawflow":{"Home":{"data":{"4":{"id":4,"name":"Node8","data":{},"class":"Node8","html":"Node8","typenode":"vue","inputs":{"input_1":{"connections":[]},"input_2":{"connections":[]}},"outputs":{"output_1":{"connections":[{"node":"5","output":"input_2"}]}},"pos_x":611.5714285714286,"pos_y":268},"5":{"id":5,"name":"Node7","data":{},"class":"Node7","html":"Node7","typenode":"vue","inputs":{"input_1":{"connections":[{"node":"4","input":"output_1"}]}},"outputs":{"output_1":{"connections":[{"node":"6","output":"input_1"}]}},"pos_x":1045.4285714285713,"pos_y":208},"6":{"id":6,"name":"Node3","data":{},"class":"Node3","html":"Node3","typenode":"vue","inputs":{"input_1":{"connections":[{"node":"5","input":"output_1"}]}},"outputs":{},"pos_x":1526,"pos_y":206.42857142857142}}}}});
+      editor.value.import({"drawflow":{"Home":{"data":{"4":{"id":4,"name":"Node8","data":{},"class":"Node8","html":"Node8","typenode":"vue","inputs":{"input_1":{"connections":[]}},"outputs":{"output_1":{"connections":[{"node":"5","output":"input_2"}]}},"pos_x":611.5714285714286,"pos_y":268},"5":{"id":5,"name":"Node7","data":{},"class":"Node7","html":"Node7","typenode":"vue","inputs":{"input_1":{"connections":[{"node":"4","input":"output_1"}]}},"outputs":{"output_1":{"connections":[{"node":"6","output":"input_1"}]}},"pos_x":1045.4285714285713,"pos_y":208},"6":{"id":6,"name":"Node3","data":{},"class":"Node3","html":"Node3","typenode":"vue","inputs":{"input_1":{"connections":[{"node":"5","input":"output_1"}]}},"outputs":{},"pos_x":1526,"pos_y":206.42857142857142}}}}});
 
 
     })
