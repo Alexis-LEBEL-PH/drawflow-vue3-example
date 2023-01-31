@@ -1,7 +1,7 @@
 <template>
     <div ref="el" v-on:focusout="focusOut">
         <nodeHeader title="Store in Memory" />
-        <p>Espace Mémoire</p>
+        <p>Memory Slot</p>
         <el-select-v2 v-model="memory_space" :options="memory_spaces" clearable allow-create filterable>
         </el-select-v2>
         <!-- <br><br> -->
@@ -31,7 +31,7 @@ export default defineComponent({
             }
             this.memory_spaces.push({ value: this.memory_space, label: this.memory_space });
             sessionStorage.memory_spaces = JSON.stringify(this.memory_spaces);
-            console.log(sessionStorage.getItem('memory_spaces'));
+            // console.log(sessionStorage.getItem('memory_spaces'));
         },
     },
     setup() {
