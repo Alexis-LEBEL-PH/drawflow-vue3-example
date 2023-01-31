@@ -3,10 +3,10 @@
  *   All rights reserved.
  */
 <template>
-    <div ref="el" v-on:focusout="focusOut">
+    <div ref="el">
         <nodeHeader title="Store in Memory" />
         <p>Memory Slot</p>
-        <el-select-v2 v-model="memory_space" :options="memory_spaces" clearable allow-create filterable>
+        <el-select-v2 v-model="memory_space" :options="memory_spaces" clearable allow-create filterable @change="focusOut">
         </el-select-v2>
         <!-- <br><br> -->
         <!-- <el-input v-model="url" df-url placeholder="Please input" size="small">

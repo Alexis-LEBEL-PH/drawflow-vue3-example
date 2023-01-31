@@ -3,7 +3,7 @@
  *   All rights reserved.
  */
 <template>
-    <div ref="el">
+    <div ref="el" v-on:mouseenter="focusIn" :key="component_key">
         <nodeHeader title="Sum" />
         <!--- + icon centered in the container with svg path -->
         <div class="icon_container">
@@ -36,6 +36,7 @@ export default defineComponent({
     setup() {
         const el = ref(null);
         const nodeId = ref(0);
+        const component_key = ref(0);
         // let df = null
         const dataNode = ref({});
         var memory_spaces = [{
@@ -51,13 +52,14 @@ export default defineComponent({
         });
 
         return {
-            el, memory_spaces, memory_space
+            el, memory_spaces, memory_space, component_key
         }
 
     },
     methods: {
         focusIn() {
             this.memory_spaces = JSON.parse(sessionStorage.getItem("memory_spaces"));
+            this.component_key++;
         },
     },
 

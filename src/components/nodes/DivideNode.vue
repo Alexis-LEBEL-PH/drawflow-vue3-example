@@ -3,7 +3,7 @@
  *   All rights reserved.
  */
 <template>
-    <div ref="el" v-on:focusin="focusIn">
+    <div ref="el" v-on:mouseenter="focusIn" :key="component_key">
         <nodeHeader title="Division" />
         <!--- division ÷ icon centered in the container with svg path -->
         <div class="icon_container">
@@ -37,11 +37,11 @@ export default defineComponent({
     watch: {
         memory_spaces: function () {
             console.log("memory_spaces changed");
-            this.$refs.elSelectV2.refresh();
         }
     },
     setup() {
         const el = ref(null);
+        const component_key = ref(0);
         const nodeId = ref(0);
         // let df = null
         const dataNode = ref({});
@@ -58,13 +58,14 @@ export default defineComponent({
         });
 
         return {
-            el, memory_spaces, memory_space
+            el, memory_spaces, memory_space, component_key
         }
 
     },
     methods: {
         focusIn() {
             this.memory_spaces = JSON.parse(sessionStorage.getItem("memory_spaces"));
+            this.component_key++;
         },
     },
 

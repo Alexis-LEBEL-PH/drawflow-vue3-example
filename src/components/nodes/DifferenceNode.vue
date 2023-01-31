@@ -3,7 +3,7 @@
  *   All rights reserved.
  */
 <template>
-    <div ref="el">
+    <div ref="el" v-on:mouseenter="focusIn" :key="component_key">
         <nodeHeader title="Difference" />
         <!--- + icon centered in the container with svg path -->
         <div class="icon_container">
@@ -33,6 +33,7 @@ export default defineComponent({
     methods: {
         focusIn() {
             this.memory_spaces = JSON.parse(sessionStorage.getItem("memory_spaces"));
+            this.component_key++;
         },
     },
     setup() {
@@ -40,6 +41,7 @@ export default defineComponent({
         const nodeId = ref(0);
         // let df = null
         const dataNode = ref({});
+        const component_key = ref(0);
         var memory_spaces = [{
             value: "1",
             label: "1"
@@ -53,7 +55,7 @@ export default defineComponent({
         });
 
         return {
-            el, memory_spaces, memory_space
+            el, memory_spaces, memory_space, component_key
         }
     }
 
