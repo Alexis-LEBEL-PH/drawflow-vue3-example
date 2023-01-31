@@ -134,7 +134,7 @@ export default {
     internalInstance.appContext.app._context.config.globalProperties.$df = editor;
 
     function exportEditor() {
-      dialogData.value = editor.value.export;
+      dialogData.value = editor.value.export();
       dialogVisible.value = true;
     }
 
