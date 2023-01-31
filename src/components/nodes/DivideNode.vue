@@ -1,14 +1,24 @@
 <template>
-    <div ref="el">
+    <div ref="el" v-on:focusin="focusIn">
         <nodeHeader title="Division" />
         <!--- division ÷ icon centered in the container with svg path -->
-        <svg class="icon" viewBox="-2350 255 4096 4096" xmlns="http://www.w3.org/2000/svg" width="150" height="150">
-            <path d="M512 0C229.248 0 0 229.248 0 512s229.248 512 512 512 512-229.248 512-512S794.752 0 512 0zM512 960C264.576 960 64 759.424 64 512S264.576 64 512 64s448 200.576 448 448-200.576 448-448 448z" fill="#ffffff" p-id="1000"></path>
-            <path d="M352 480c-17.664 0-32 14.336-32 32s14.336 32 32 32h320c17.664 0 32-14.336 32-32s-14.336-32-32-32H352z" fill="#ffffff" p-id="1001"></path>
-            <!-- . above and below the line -->
-            <circle cx="512" cy="320" r="32" fill="#ffffff" p-id="1002"></circle>
-            <circle cx="512" cy="740" r="32" fill="#ffffff" p-id="1003"></circle>
-        </svg>
+        <div class="icon_container">
+            <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="3em" height="3em"
+                style="display: block;">
+                <path
+                    d="M512 0C229.248 0 0 229.248 0 512s229.248 512 512 512 512-229.248 512-512S794.752 0 512 0zM512 960C264.576 960 64 759.424 64 512S264.576 64 512 64s448 200.576 448 448-200.576 448-448 448z"
+                    fill="#ffffff" p-id="1000"></path>
+                <path
+                    d="M352 480c-17.664 0-32 14.336-32 32s14.336 32 32 32h320c17.664 0 32-14.336 32-32s-14.336-32-32-32H352z"
+                    fill="#ffffff" p-id="1001"></path>
+                <!-- . above and below the line -->
+                <circle cx="512" cy="320" r="32" fill="#ffffff" p-id="1002"></circle>
+                <circle cx="512" cy="740" r="32" fill="#ffffff" p-id="1003"></circle>
+            </svg>
+        </div>
+        <p>Espace Mémoire</p>
+        <el-select-v2 ref="elSelectV2" v-model="memory_space" :options="memory_spaces" clearable>
+        </el-select-v2>
     </div>
 </template>
 
@@ -20,35 +30,59 @@ export default defineComponent({
     components: {
         nodeHeader
     },
+    watch: {
+        memory_spaces: function () {
+            this.$refs.elSelectV2.refresh();
+        }
+    },
     setup() {
         const el = ref(null);
         const nodeId = ref(0);
-        let df = null
+        // let df = null
         const url = ref('');
         const dataNode = ref({});
-
-        df = getCurrentInstance().appContext.config.globalProperties.$df.value;
-
-        const updateSelect = (value) => {
-            dataNode.value.data.method = value;
-            df.updateNodeDataFromId(nodeId.value, dataNode.value);
-        }
-
+        var memory_spaces = [{
+            value: "1",
+            label: "1"
+        }];
+        const memory_space = ref("1");
 
         onMounted(async () => {
-            await nextTick()
-            nodeId.value = el.value.parentElement.parentElement.id.slice(5)
-            dataNode.value = df.getNodeFromId(nodeId.value)
-
-            url.value = dataNode.value.data.url;
-            // method.value = dataNode.value.data.method;
+            await nextTick();
+            if (sessionStorage.getItem("memory_spaces"))
+                memory_spaces = JSON.parse(sessionStorage.getItem("memory_spaces"));
         });
 
         return {
-            el, url,  updateSelect
+            el, url, memory_spaces, memory_space
         }
 
-    }
+    },
+    methods: {
+        // focusOut() {
+        // if (this.memory_space == "" || this.memory_space == null)
+        //     return;
+        // // If the user has entered a new memory space, add it to the list
+        // for (var i = 0; i < this.memory_spaces.length; i++) {
+        //     if (this.memory_spaces[i].value == this.memory_space) {
+        //         return;
+        //     }
+        // }
+        // },
+        focusIn() {
+            this.memory_spaces = JSON.parse(sessionStorage.getItem("memory_spaces"));
+        },
+    },
 
 })
 </script>
+
+<style scoped>
+.icon_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4em;
+    margin: auto 1em;
+}
+</style>
