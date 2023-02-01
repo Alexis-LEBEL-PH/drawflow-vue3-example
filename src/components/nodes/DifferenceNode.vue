@@ -32,8 +32,10 @@ export default defineComponent({
     },
     methods: {
         focusIn() {
-            this.memory_spaces = JSON.parse(sessionStorage.getItem("memory_spaces"));
-            this.component_key++;
+            if (sessionStorage.getItem("memory_spaces")) {
+                this.memory_spaces = JSON.parse(sessionStorage.getItem("memory_spaces"));
+                this.component_key++;
+            }
         },
     },
     setup() {

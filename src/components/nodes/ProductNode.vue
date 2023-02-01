@@ -41,10 +41,10 @@ export default defineComponent({
         // let df = null
         const dataNode = ref({});
         const component_key = ref(0);
-        var memory_spaces = [{
+        var memory_spaces = ref([{
             value: "1",
             label: "1"
-        }];
+        }]);
         const memory_space = ref("1");
 
         onMounted(async () => {
@@ -60,8 +60,10 @@ export default defineComponent({
     },
     methods: {
         focusIn() {
-            this.memory_spaces = JSON.parse(sessionStorage.getItem("memory_spaces"));
-            this.component_key++;
+            if (sessionStorage.getItem("memory_spaces")) {
+                this.memory_spaces = JSON.parse(sessionStorage.getItem("memory_spaces"));
+                this.component_key++;
+            }
         },
     },
 
