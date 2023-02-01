@@ -21,7 +21,7 @@
             </svg>
         </div>
         <p>Memory Slot</p>
-        <el-select-v2 ref="elSelectV2" v-model="memory_space" :options="memory_spaces" clearable>
+        <el-select-v2 ref="elSelectV2" v-model="memory_space" :options="memory_spaces" clearable @change="selectChange">
         </el-select-v2>
     </div>
 </template>
@@ -43,22 +43,29 @@ export default defineComponent({
         const el = ref(null);
         const component_key = ref(0);
         const nodeId = ref(0);
-        // let df = null
-        const dataNode = ref({});
+        let df = null
+        const dataNode = ref({
+            data: {
+                memory_space: ""
+            }
+        });
         var memory_spaces = [{
             value: "1",
             label: "1"
         }];
         const memory_space = ref("1");
+        df = getCurrentInstance().appContext.config.globalProperties.$df.value;
 
         onMounted(async () => {
             await nextTick();
             if (sessionStorage.getItem("memory_spaces"))
                 memory_spaces = JSON.parse(sessionStorage.getItem("memory_spaces"));
+            nodeId.value = el.value.parentElement.parentElement.id.slice(5);
+            dataNode.value = df.getNodeFromId(nodeId.value);
         });
 
         return {
-            el, memory_spaces, memory_space, component_key
+            el, memory_spaces, memory_space, component_key, dataNode, df, nodeId
         }
 
     },
@@ -69,6 +76,11 @@ export default defineComponent({
                 this.component_key++;
             }
         },
+        selectChange(){
+            // This stores the memory space in the node data for export
+            this.dataNode.data.memory_space = this.memory_space;
+            this.df.updateNodeDataFromId(this.nodeId, this.dataNode);
+        }
     },
 
 })

@@ -82,7 +82,10 @@ export default {
         color: '#ff9900',
         item: 'Node3',
         input: 1,
-        output: 0
+        output: 0,
+        data: {
+          memory_space: ""
+        }
       },
       // {
       //   name: 'Get from Memory',
@@ -186,7 +189,7 @@ export default {
       pos_y = pos_y * (editor.value.precanvas.clientHeight / (editor.value.precanvas.clientHeight * editor.value.zoom)) - (editor.value.precanvas.getBoundingClientRect().y * (editor.value.precanvas.clientHeight / (editor.value.precanvas.clientHeight * editor.value.zoom)));
 
       const nodeSelected = listNodes.find(ele => ele.item == name);
-      editor.value.addNode(name, nodeSelected.input, nodeSelected.output, pos_x, pos_y, name, {}, name, 'vue');
+      editor.value.addNode(name, nodeSelected.input, nodeSelected.output, pos_x, pos_y, name, nodeSelected.data || {}, name, 'vue');
 
     }
 

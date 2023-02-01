@@ -6,7 +6,8 @@
     <div ref="el">
         <nodeHeader title="Store in Memory" />
         <p>Memory Slot</p>
-        <el-select-v2 v-model="memory_space" :options="memory_spaces" clearable allow-create filterable @change="focusOut">
+        <el-select-v2 v-model="memory_space" :options="memory_spaces" clearable allow-create filterable
+            @change="selectChange">
         </el-select-v2>
         <!-- <br><br> -->
         <!-- <el-input v-model="url" df-url placeholder="Please input" size="small">
@@ -24,7 +25,11 @@ export default defineComponent({
         nodeHeader
     },
     methods: {
-        focusOut() {
+        selectChange() {
+            // This stores the memory space in the node data for export
+            this.dataNode.data.memory_space = this.memory_space;
+            this.df.updateNodeDataFromId(this.nodeId, this.dataNode);
+            // See if it needs to add the memory space to the list
             if (this.memory_space == "" || this.memory_space == null)
                 return;
             // If the user has entered a new memory space, add it to the list
@@ -35,7 +40,6 @@ export default defineComponent({
             }
             this.memory_spaces.push({ value: this.memory_space, label: this.memory_space });
             sessionStorage.memory_spaces = JSON.stringify(this.memory_spaces);
-            // console.log(sessionStorage.getItem('memory_spaces'));
         },
     },
     setup() {
@@ -44,7 +48,11 @@ export default defineComponent({
         let df = null
         const url = ref('');
         const selected_variable = ref(0);
-        const dataNode = ref({});
+        const dataNode = ref({
+            data: {
+                memory_space: ""
+            }
+        });
         var memory_spaces = [{
             value: "1",
             label: "1"
@@ -53,21 +61,18 @@ export default defineComponent({
 
         df = getCurrentInstance().appContext.config.globalProperties.$df.value;
 
-        const updateSelect = (value) => {
-            dataNode.value.data.method = value;
-            df.updateNodeDataFromId(nodeId.value, dataNode.value);
-        }
-
         onMounted(async () => {
             await nextTick();
             // getting memory spaces from sessionStorage
             if (sessionStorage.getItem('memory_spaces')) {
                 memory_spaces = JSON.parse(sessionStorage.getItem('memory_spaces'));
             }
+            nodeId.value = el.value.parentElement.parentElement.id.slice(5);
+            dataNode.value = df.getNodeFromId(nodeId.value);
         });
 
         return {
-            el, url, method: selected_variable, memory_spaces, memory_space, updateSelect
+            el, url, selected_variable, memory_spaces, memory_space, dataNode, df, nodeId
         }
 
     }
