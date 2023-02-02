@@ -52,6 +52,7 @@ import Node5 from './nodes/SumNode.vue'
 import Node6 from './nodes/DifferenceNode.vue'
 import Node7 from './nodes/DivideNode.vue'
 import Node8 from './nodes/ProductNode.vue'
+import Node9 from './nodes/InsideRangeNode.vue'
 import axios from 'axios'
 
 
@@ -79,22 +80,22 @@ export default {
       {
         name: 'Store in Memory',
         block_type: 2,
-        color: '#ff9900',
+        color: '#C077CC',
         item: 'Node3',
         input: 1,
-        output: 0,
+        output: 1,
         data: {
           memory_space: ""
         }
       },
-      // {
-      //   name: 'Get from Memory',
-      //   block_type: 2,
-      //   color: '#ff9900',
-      //   item: 'Node4',
-      //   input: 0,
-      //   output: 1
-      // },
+      {
+        name: 'Inside Range',
+        block_type: 3,
+        color: '#ff9999',
+        item: 'Node9',
+        input: 1,
+        output: 2
+      },
       {
         name: 'Product',
         block_type: 4,
@@ -215,6 +216,7 @@ export default {
       editor.value.registerNode('Node6', Node6, {}, {});
       editor.value.registerNode('Node7', Node7, {}, {});
       editor.value.registerNode('Node8', Node8, {}, {});
+      editor.value.registerNode('Node9', Node9, {}, {});
 
       editor.value.import({ "drawflow": { "Home": { "data": { "4": { "id": 4, "name": "Node8", "data": {}, "class": "Node8", "html": "Node8", "typenode": "vue", "inputs": { "input_1": { "connections": [] } }, "outputs": { "output_1": { "connections": [{ "node": "5", "output": "input_2" }] } }, "pos_x": 611.5714285714286, "pos_y": 268 }, "5": { "id": 5, "name": "Node7", "data": {}, "class": "Node7", "html": "Node7", "typenode": "vue", "inputs": { "input_1": { "connections": [{ "node": "4", "input": "output_1" }] } }, "outputs": { "output_1": { "connections": [{ "node": "6", "output": "input_1" }] } }, "pos_x": 1045.4285714285713, "pos_y": 208 }, "6": { "id": 6, "name": "Node3", "data": {}, "class": "Node3", "html": "Node3", "typenode": "vue", "inputs": { "input_1": { "connections": [{ "node": "5", "input": "output_1" }] } }, "outputs": {}, "pos_x": 1526, "pos_y": 206.42857142857142 } } } } });
 
