@@ -6,7 +6,7 @@
     <div ref="el">
         <nodeHeader title="Send MQTT" />
         <label>Encoding type :
-            <select v-model="selected_encoding_type" placeholder="Select" @change="updateSelect" size="small" df-method>
+            <select v-model="selected_encoding_type" placeholder="Select" size="small" df-method @change="selectChange">
                 <option v-for="(item, index) in encoding_types" :key="index" :value="item">
                     {{ item }}
                 </option>
@@ -16,8 +16,10 @@
         <br />
         <label>
             Offset / Scale : <br>
-            <ElInput v-model="offset" type="number" min=0 max=255 size="small"/>
-            <ElInput v-model="scale" type="number" min=0 max=65535 size="small"/>
+            <ElInput v-model="offset" type="number" min=0 max=255 size="small" @change="selectChange"/>
+            <ElInput v-model="scale" type="number" min=0 max=65535 size="small" @change="selectChange"/>
+            Time resolution (us) : <br>
+            <ElInput v-model="time_resolution" type="number" min=0 max=4000000000 size="small" @change="selectChange"/>
         </label>
     </div>
 </template>
@@ -32,7 +34,15 @@ export default defineComponent({
         nodeHeader
     },
     setup() {
-        const dataNode = ref({});
+        const dataNode = ref({
+            data: {
+                offset: 0,
+                scale: 0,
+                MQTTValueID: 0,
+                encoding_type: 0,
+                time_resolution: 0
+            }
+        });
         const el = ref(null);
         const textarea = ref('');
         let df = null
@@ -43,6 +53,7 @@ export default defineComponent({
             2: 'float',
         });
         const offset = ref(0);
+        const time_resolution = ref(0);
         const scale  = ref(0);
         const MQTTValueID = ref(0);
         const selected_encoding_type = ref(0);
@@ -50,16 +61,10 @@ export default defineComponent({
         const direction = ref('rtl');
         df = getCurrentInstance().appContext.config.globalProperties.$df.value;
 
-        const updateSelect = (value) => {
-            dataNode.value.data.script = value;
-            df.updateNodeDataFromId(nodeId.value, dataNode.value);
-        }
-
         onMounted(async () => {
             await nextTick()
             nodeId.value = el.value.parentElement.parentElement.id.slice(5)
             dataNode.value = df.getNodeFromId(nodeId.value)
-            textarea.value = dataNode.value.data.script;
         });
 
         return {
@@ -67,11 +72,21 @@ export default defineComponent({
             drawer,
             direction,
             textarea,
-            updateSelect,
             encoding_types,
-            offset, scale, MQTTValueID, selected_encoding_type,
+            offset, scale, MQTTValueID, selected_encoding_type, dataNode, df, nodeId, time_resolution
         }
     },
+    methods: {
+        selectChange(){
+            // This stores the memory space in the node data for export
+            this.dataNode.data.offset = this.offset;
+            this.dataNode.data.scale = this.scale;
+            this.dataNode.data.MQTTValueID = this.MQTTValueID;
+            this.dataNode.data.encoding_type = this.selected_encoding_type;
+            this.dataNode.data.time_resolution = this.time_resolution;
+            this.df.updateNodeDataFromId(this.nodeId, this.dataNode);
+        }
+    }
 
 
 })
