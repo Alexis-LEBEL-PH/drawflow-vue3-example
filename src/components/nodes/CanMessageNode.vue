@@ -57,18 +57,6 @@ export default defineComponent({
             df.updateNodeDataFromId(nodeId.value, dataNode.value);
         }
 
-        // const hex_format = (value) => {
-        //     // This is the formatter that only allows hex data to be entered in the input
-        //     console.log(value);
-        //     const reg = /^[0-9a-fA-F]*$/;
-        //     if (reg.test(value)) {
-        //         return value;
-        //     } else {
-        //         return value.slice(0, -1);
-        //     }
-        // }
-
-
         onMounted(async () => {
             await nextTick()
             nodeId.value = el.value.parentElement.parentElement.id.slice(5)
