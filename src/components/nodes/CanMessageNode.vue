@@ -7,7 +7,7 @@
         <nodeHeader title="Can Message" />
         <div class="root">
             <label>Can channel :</label>
-            <el-select-v2 v-model="channel" :options="CAN_Channels" placeholder="Select" @change="updateSelect"
+            <el-select-v2 v-model="channel" :options="CAN_Channels" placeholder="Select" @change="updateValues"
                 size="small" df-method>
             </el-select-v2>
             <!-- <br><br> -->
