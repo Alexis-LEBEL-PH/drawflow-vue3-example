@@ -73,7 +73,7 @@ export default {
       },
       {
         name: 'Can Decoding',
-        block_type: 0,
+        block_type: 1,
         color: '#49494970',
         item: 'Node13',
         input: 1,
@@ -81,7 +81,7 @@ export default {
       },
       {
         name: 'Native Signal',
-        block_type: 0,
+        block_type: 2,
         color: '#49494970',
         item: 'Node12',
         input: 0,
@@ -89,7 +89,7 @@ export default {
       },
       {
         name: 'Send to Cloud',
-        block_type: 1,
+        block_type: 3,
         color: 'blue',
         item: 'Node2',
         input: 1,
@@ -97,7 +97,7 @@ export default {
       },
       {
         name: 'Store in Memory',
-        block_type: 2,
+        block_type: 4,
         color: '#C077CC',
         item: 'Node3',
         input: 1,
@@ -105,7 +105,7 @@ export default {
       },
       {
         name: 'Inside Range',
-        block_type: 3,
+        block_type: 5,
         color: '#ff9999',
         item: 'Node9',
         input: 1,
@@ -113,7 +113,7 @@ export default {
       },
       {
         name: 'Product',
-        block_type: 4,
+        block_type: 6,
         color: '#ff9900',
         item: 'Node8',
         input: 1,
@@ -121,7 +121,7 @@ export default {
       },
       {
         name: 'Division',
-        block_type: 5,
+        block_type: 7,
         color: '#ff9900',
         item: 'Node7',
         input: 1,
@@ -129,7 +129,7 @@ export default {
       },
       {
         name: 'Sum',
-        block_type: 6,
+        block_type: 8,
         color: '#ff9900',
         item: 'Node5',
         input: 1,
@@ -137,7 +137,7 @@ export default {
       },
       {
         name: 'Difference',
-        block_type: 7,
+        block_type: 9,
         color: '#ff9900',
         item: 'Node6',
         input: 1,
@@ -145,7 +145,7 @@ export default {
       },
       {
         name: 'Time',
-        block_type: 8,
+        block_type: 10,
         color: '#ff9900',
         item: 'Node10',
         input: 0,
