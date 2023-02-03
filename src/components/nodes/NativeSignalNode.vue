@@ -7,7 +7,7 @@
         <nodeHeader title="Native Signal" />
         <div class="root">
             <label>Signal :</label>
-            <el-select-v2 v-model="signal" :options="NativeSignals" placeholder="Select" @change="updateSelect"
+            <el-select-v2 v-model="signal" :options="NativeSignals" placeholder="Select" @change="updateValues"
                 size="small" df-method>
             </el-select-v2>
         </div>
@@ -44,11 +44,7 @@ export default defineComponent({
         df = getCurrentInstance().appContext.config.globalProperties.$df.value;
 
         const updateValues = () => {
-            const reg = /^[0-9a-fA-F]{3,8}$/;
-            if(!can_id.value.match(reg)) {
-                can_id.value = '';
-            }
-            dataNode.value.data.channel = signal;
+            dataNode.value.data.signal = signal;
             df.updateNodeDataFromId(nodeId.value, dataNode.value);
         }
 
